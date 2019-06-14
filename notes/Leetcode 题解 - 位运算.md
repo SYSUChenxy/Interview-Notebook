@@ -152,6 +152,30 @@ public int missingNumber(int[] nums) {
 }
 ```
 
+[268. Single Number II  (Medium)](https://leetcode.com/problems/single-number-ii/description/)
+
+```html
+Input: [2,2,3,2]
+Output: 3
+```
+
+题目描述：数组中除了一个特殊的数只出现一次，其他数字都出现过3次，求得特殊的数。
+
+
+```java
+public int missingNumber(int[] nums) {
+    int ret = 0;
+    int [] cnt = new int[32];
+    for (int i = 0; i < nums.length; i++) {
+        for (int j = 0; j < 32; j++) 
+              cnt[j] += (nums[i] >> j) & 1;
+    }//记录32个位置上1出现的次数，适用于出现次数不同（1次或K次）中寻找出现1次的数值
+    for(int j = 0; j < 32; j++)
+        ret += (cnt[j]%3) << j;
+    return ret;
+}
+```
+
 # 4. 数组中不重复的两个元素
 
 [260. Single Number III (Medium)](https://leetcode.com/problems/single-number-iii/description/)
